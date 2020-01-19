@@ -40,7 +40,7 @@ RUN apk update \
     php7-cgi \
     php7-session \
     php7-mbstring \
-    php7.0-xml \
+    php7-xml \
     bash \
     musl-utils && \
     wget -q http://korphome.ru/torrent_monitor/tm-latest.zip -O /tmp/tm-latest.zip \
