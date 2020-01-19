@@ -25,8 +25,20 @@ COPY rootfs /
 RUN apk update \
     && apk upgrade \
     && apk --no-cache add --update -t deps wget unzip sqlite build-base tar re2c make file curl \
-    && apk --no-cache add nginx php5-common php5-cli php5-fpm php5-curl php5-sqlite3 php5-pdo_sqlite php5-iconv php5-json php5-ctype php5-zip \
-    && wget -q http://korphome.ru/torrent_monitor/tm-latest.zip -O /tmp/tm-latest.zip \
+    && apk --no-cache add \
+    nginx \
+    php7-common \
+    php7-cli \
+    php7-fpm \
+    php7-curl \
+    php7-sqlite3 \
+    php7-pdo_sqlite \
+    php7-iconv \
+    php7-json \
+    php7-ctype \
+    php7-zip \
+    musl-utils && \
+    wget -q http://korphome.ru/torrent_monitor/tm-latest.zip -O /tmp/tm-latest.zip \
     && unzip /tmp/tm-latest.zip -d /tmp/ \
     && mv /tmp/TorrentMonitor-master/* /data/htdocs \
     && cat /data/htdocs/db_schema/sqlite.sql | sqlite3 /data/htdocs/db_schema/tm.sqlite \
@@ -34,11 +46,11 @@ RUN apk update \
     && ln -sf /dev/stdout /var/log/nginx/access.log \
     && ln -sf /dev/stderr /var/log/nginx/error.log \
     && ln -sf /dev/stdout /var/log/php-fpm.log \
-    && rm /usr/bin/iconv \
-    && curl -SL http://ftpmirror.gnu.org/libiconv/libiconv-1.16.tar.gz | tar -xz -C /tmp \
+#    && rm /usr/bin/iconv \
+#    && curl -SL http://ftpmirror.gnu.org/libiconv/libiconv-1.16.tar.gz | tar -xz -C /tmp \
 #    && cd /tmp/libiconv-1.14 && patch -p1 < /tmp/iconv-patch.patch \
-    && ./configure --prefix=/usr/local \
-    && make && make install \
+#    && ./configure --prefix=/usr/local \
+#    && make && make install \
     && apk del --purge deps; rm -rf /tmp/* /var/cache/apk/*
 
 #------------------------------------------------------------------------------
