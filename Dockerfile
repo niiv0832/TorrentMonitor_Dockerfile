@@ -1,14 +1,14 @@
 #------------------------------------------------------------------------------
 # Set the base image for subsequent instructions:
 #------------------------------------------------------------------------------
-FROM alpine:3.4
+FROM alpine:latest
 MAINTAINER Siarhei Navatski <navatski@gmail.com>, Andrey Aleksandrov <alex.demion@gmail.com>
 
 #------------------------------------------------------------------------------
 # Environment variables:
 #------------------------------------------------------------------------------
-ENV VERSION="1.7.7" \
-    RELEASE_DATE="12.08.2018" \
+ENV VERSION="1.8.1" \
+    RELEASE_DATE="03.01.2020" \
     CRON_TIMEOUT="0 * * * *" \
     PHP_TIMEZONE="UTC" \
     PHP_MEMORY_LIMIT="512M" \
@@ -17,7 +17,7 @@ ENV VERSION="1.7.7" \
 #------------------------------------------------------------------------------
 # Populate root file system:
 #------------------------------------------------------------------------------
-ADD rootfs /
+COPY rootfs /
 
 #------------------------------------------------------------------------------
 # Install:
@@ -36,7 +36,7 @@ RUN apk update \
     && ln -sf /dev/stdout /var/log/php-fpm.log \
     && rm /usr/bin/iconv \
     && curl -SL http://ftpmirror.gnu.org/libiconv/libiconv-1.14.tar.gz | tar -xz -C /tmp \
-    && cd /tmp/libiconv-1.14 && patch -p1 < /tmp/iconv-patch.patch \
+#    && cd /tmp/libiconv-1.14 && patch -p1 < /tmp/iconv-patch.patch \
     && ./configure --prefix=/usr/local \
     && make && make install \
     && apk del --purge deps; rm -rf /tmp/* /var/cache/apk/*
