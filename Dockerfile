@@ -24,7 +24,7 @@ COPY rootfs /
 #------------------------------------------------------------------------------
 RUN apk update \
     && apk upgrade \
-#    && apk --no-cache add --update -t deps wget unzip sqlite build-base tar re2c make file curl \
+    && apk --no-cache add --update -t deps wget unzip sqlite build-base tar re2c make file curl \
     && apk --no-cache add \
     nginx \
     php7-common \
@@ -51,8 +51,7 @@ RUN apk update \
 #    && cd /tmp/libiconv-1.14 && patch -p1 < /tmp/iconv-patch.patch \
 #    && ./configure --prefix=/usr/local \
 #    && make && make install \
-#    && apk del --purge deps; 
-    && rm -rf /tmp/* /var/cache/apk/* \
+    && apk del --purge deps; rm -rf /tmp/* /var/cache/apk/* \
     && chmod u+x /init
 
 #------------------------------------------------------------------------------
