@@ -37,6 +37,7 @@ RUN apk update \
     php7-json \
     php7-ctype \
     php7-zip \
+    bash \
     musl-utils && \
     wget -q http://korphome.ru/torrent_monitor/tm-latest.zip -O /tmp/tm-latest.zip \
     && unzip /tmp/tm-latest.zip -d /tmp/ \
