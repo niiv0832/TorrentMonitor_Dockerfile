@@ -5,12 +5,12 @@ test -f /data/htdocs/db/tm.sqlite || cp /data/htdocs/db_schema/tm.sqlite /data/h
 
 # Configure system
 # Set PHP timezone
-sed -i "s#PHP_TIMEZONE#${PHP_TIMEZONE}#" /etc/php5/php.ini
-sed -i "s#PHP_TIMEZONE#${PHP_TIMEZONE}#" /etc/php5/cli/php.ini
+sed -i "s#PHP_TIMEZONE#${PHP_TIMEZONE}#" /etc/php7/php.ini
+sed -i "s#PHP_TIMEZONE#${PHP_TIMEZONE}#" /etc/php7/cli/php.ini
 
 # Set PHP memory limit
-sed -i "s#PHP_MEMORY_LIMIT#${PHP_MEMORY_LIMIT}#" /etc/php5/php.ini
-sed -i "s#PHP_MEMORY_LIMIT#${PHP_MEMORY_LIMIT}#" /etc/php5/cli/php.ini
+sed -i "s#PHP_MEMORY_LIMIT#${PHP_MEMORY_LIMIT}#" /etc/php7/php.ini
+sed -i "s#PHP_MEMORY_LIMIT#${PHP_MEMORY_LIMIT}#" /etc/php7/cli/php.ini
 
 # Set cront timeuot for engine.php
 sed -i "s#CRON_TIMEOUT#${CRON_TIMEOUT}#" /var/spool/cron/crontabs/root
