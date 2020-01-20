@@ -67,8 +67,14 @@ LABEL ru.korphome.version="${VERSION}" \
 
 #------------------------------------------------------------------------------
 # Set volumes, workdir, expose ports and entrypoint:
+# /scripts - for http-knocking starting script
+# /root/.config/rclone - for rclone config file
+# /data/htdocs/torrents - for download .torrent files
 #------------------------------------------------------------------------------
 VOLUME ["/data/htdocs/db", "/data/htdocs/torrents", "/scripts", "/root/.config/rclone"]
 WORKDIR /
+#------------------------------------------------------------------------------
+# port 80 for TorMon port 2000 for http-knocking:
+#------------------------------------------------------------------------------
 EXPOSE 80 2000
 ENTRYPOINT ["/init"]
