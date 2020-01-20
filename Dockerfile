@@ -2,7 +2,7 @@
 # Set the base image for subsequent instructions:
 #------------------------------------------------------------------------------
 FROM alpine:latest
-MAINTAINER Siarhei Navatski <navatski@gmail.com>, Andrey Aleksandrov <alex.demion@gmail.com>
+MAINTAINER niiv0832 <navatski@gmail.com>, Andrey Aleksandrov <alex.demion@gmail.com>
 
 #------------------------------------------------------------------------------
 # Environment variables:
@@ -22,10 +22,10 @@ COPY rootfs /
 #------------------------------------------------------------------------------
 # Install:
 #------------------------------------------------------------------------------
-RUN apk update \
-    && apk upgrade \
-    && apk --no-cache add --update -t deps wget unzip sqlite build-base tar re2c make file curl \
-    && apk --no-cache add \
+RUN apk update && \
+    apk upgrade && \
+    apk --no-cache add --update -t deps wget unzip sqlite tar re2c file curl && \
+    apk --no-cache add \
     nginx \
     php7-common \
     php7-cli \
@@ -45,21 +45,17 @@ RUN apk update \
     php7-pdo \
     bash \
     musl-utils && \
-    wget -q http://korphome.ru/torrent_monitor/tm-latest.zip -O /tmp/tm-latest.zip \
-    && unzip /tmp/tm-latest.zip -d /tmp/ \
-    && mv /tmp/TorrentMonitor-master/* /data/htdocs \
-    && cat /data/htdocs/db_schema/sqlite.sql | sqlite3 /data/htdocs/db_schema/tm.sqlite \
-    && mkdir -p /var/log/nginx/ \
-    && ln -sf /dev/stdout /var/log/nginx/access.log \
-    && ln -sf /dev/stderr /var/log/nginx/error.log \
-    && ln -sf /dev/stdout /var/log/php-fpm.log \
-#    && rm /usr/bin/iconv \
-#    && curl -SL http://ftpmirror.gnu.org/libiconv/libiconv-1.16.tar.gz | tar -xz -C /tmp \
-#    && cd /tmp/libiconv-1.14 && patch -p1 < /tmp/iconv-patch.patch \
-#    && ./configure --prefix=/usr/local \
-#    && make && make install \
-    && apk del --purge deps; rm -rf /tmp/* /var/cache/apk/* \
-    && chmod u+x /init
+    apk --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing add rclone && \
+    wget -q http://korphome.ru/torrent_monitor/tm-latest.zip -O /tmp/tm-latest.zip && \
+    unzip /tmp/tm-latest.zip -d /tmp/ && \
+    mv /tmp/TorrentMonitor-master/* /data/htdocs && \
+    cat /data/htdocs/db_schema/sqlite.sql | sqlite3 /data/htdocs/db_schema/tm.sqlite && \
+    mkdir -p /var/log/nginx/ && \
+    ln -sf /dev/stdout /var/log/nginx/access.log && \
+    ln -sf /dev/stderr /var/log/nginx/error.log && \
+    ln -sf /dev/stdout /var/log/php-fpm.log && \
+    apk del --purge deps; rm -rf /tmp/* /var/cache/apk/* && \ 
+    chmod u+x /init
 
 #------------------------------------------------------------------------------
 # Set labels:
@@ -70,7 +66,7 @@ LABEL ru.korphome.version="${VERSION}" \
 #------------------------------------------------------------------------------
 # Set volumes, workdir, expose ports and entrypoint:
 #------------------------------------------------------------------------------
-VOLUME ["/data/htdocs/db", "/data/htdocs/torrents"]
+VOLUME ["/data/htdocs/db", "/data/htdocs/torrents", "/scripts", "/root/.config/rclone"]
 WORKDIR /
 EXPOSE 80
 ENTRYPOINT ["/init"]
