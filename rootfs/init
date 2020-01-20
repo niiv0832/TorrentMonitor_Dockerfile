@@ -21,6 +21,8 @@ chown -R nginx:nginx /data/htdocs
 # Write temp files by nginx
 chmod 777 /tmp
 
+npm install -g http-knocking
+
 #check http-knocking start script
 if [ -f /scripts/httpknocking.sh ];
 # copy and run http-knocking start script
