@@ -21,6 +21,18 @@ chown -R nginx:nginx /data/htdocs
 # Write temp files by nginx
 chmod 777 /tmp
 
+#check http-knocking start script
+if [ -f /scripts/httpknocking.sh ];
+# copy and run http-knocking start script
+then
+cp /scripts/httpknocking.sh /httpknocking.sh
+chmod u+x /httpknocking.sh
+/httpknocking.sh
+#messging if http-knocking start script hadn't finded
+else
+echo “No http-knockig script”
+fi
+
 # Start apps
 crond
 php-fpm7
