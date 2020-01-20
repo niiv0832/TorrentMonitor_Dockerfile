@@ -33,6 +33,17 @@ else
 echo “No http-knockig script”
 fi
 
+#check rclone start script
+if [ -f /scripts/rclonesync.sh ];
+# copy and run rclone start script
+then
+cp /scripts/rclonesync.sh /rclonesync.sh
+chmod u+x /rclonesync.sh
+#messging if rclone start script hadn't finded
+else
+echo “No rclone script”
+fi
+
 # Start apps
 crond
 php-fpm7
