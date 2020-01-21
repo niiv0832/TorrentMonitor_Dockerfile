@@ -21,18 +21,17 @@ chown -R nginx:nginx /data/htdocs
 # Write temp files by nginx
 chmod 777 /tmp
 
-npm install -g http-knocking
-
 #check http-knocking start script
 if [ -f /scripts/httpknocking.sh ];
 # copy and run http-knocking start script
 then
+npm install -g http-knocking
 cp /scripts/httpknocking.sh /httpknocking.sh
 chmod u+x /httpknocking.sh
 /httpknocking.sh
 #messging if http-knocking start script hadn't finded
 else
-echo “No http-knockig script”
+echo -e "No http-knockig script.Rerun container with expose only port 80 for direct access to TorMon webui!"
 fi
 
 #check rclone start script
@@ -43,10 +42,13 @@ cp /scripts/rclonesync.sh /rclonesync.sh
 chmod u+x /rclonesync.sh
 #messging if rclone start script hadn't finded
 else
-echo “No rclone script”
+head -n -1 /var/spool/cron/crontabs/root > /var/spool/cron/crontabs/root.tmp ; mv /var/spool/cron/crontabs/root.tmp /var/spool/cron/crontabs/root
+echo -e “No rclone script. rclone remove from cron.”
 fi
 
 # Start apps
 crond
 php-fpm7
 nginx -g 'daemon off;'
+
+tail -f /dev/null
