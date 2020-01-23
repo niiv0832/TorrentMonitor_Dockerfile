@@ -11,7 +11,7 @@ ENV VERSION="1.8.2" \
     CRON_TIMEOUT="0/10 * * * *" \
     PHP_TIMEZONE="UTC" \
     PHP_MEMORY_LIMIT="512M" \
-    LD_PRELOAD="/usr/lib/preloadable_libiconv.so php"
+    LD_PRELOAD="/usr/lib/preloadable_libiconv.so"
 #------------------------------------------------------------------------------
 # Populate root file system:
 #------------------------------------------------------------------------------
@@ -27,6 +27,14 @@ RUN apk update && \
     bash \
     curl \
     nginx \
+    php7 \
+    php7-bcmath \
+    php7-gd \
+    php7-imap \
+    php7-pecl-mcrypt \
+    php7-soap \
+    php7-tidy \
+    php-xmlrpc \
     php7-common \
     php7-fpm \
     php7-sqlite3 \
