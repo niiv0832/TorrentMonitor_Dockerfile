@@ -3,7 +3,6 @@
 #------------------------------------------------------------------------------
 FROM alpine:latest
 MAINTAINER nniiv0832 <dockerhubme-tormon@yahoo.com>
-
 #------------------------------------------------------------------------------
 # Environment variables:
 #------------------------------------------------------------------------------
@@ -13,55 +12,56 @@ ENV VERSION="1.8.1" \
     PHP_TIMEZONE="UTC" \
     PHP_MEMORY_LIMIT="512M" \
     LD_PRELOAD="/usr/lib/preloadable_libiconv.so"
-
 #------------------------------------------------------------------------------
 # Populate root file system:
 #------------------------------------------------------------------------------
 COPY rootfs /
-
 #------------------------------------------------------------------------------
 # Install:
-# 
-# php modules from tormon.ru:  
-# php-mod-ctype 
-# php-mod-curl 
-# php-mod-iconv 
-# php-mod-mbstring 
-# php-mod-pdo 
-# php-mod-simplexml 
-# php-mod-xml 
-# php-mod-zip
-# php7.0-cli 
-# php7.0-cgi 
-# php7.0-curl 
-# php7.0-json 
-# php7.0-mbstring 
-# php7.0-mysql 
-# php7.0-xml 
-# php7.0-zip
+### php modules from nawa/torrentmonitor
+# php7-common 
+# php7-fpm 
+# php7-sqlite3 
+# php7-pdo_sqlite 
+### php modules from tormon.ru:  
+# php7-ctype 
+# php7-curl 
+# php7-iconv 
+# php7-mbstring 
+# php7-pdo 
+# php7-simplexml 
+# php7-xml 
+# php7-zip
+### forum.korphome.ru/viewtopic.php?f=3&t=138 
+# php7-cli 
+# php7-cgi 
+# php7-json
 #------------------------------------------------------------------------------
 RUN apk update && \
     apk upgrade && \
-    apk --no-cache add --update -t deps wget unzip sqlite tar re2c file curl && \
+#    delete from original: tar re2c file curl
+    apk --no-cache add --update -t deps wget unzip sqlite && \
     apk --no-cache add \
     bash \
     nginx \
     php7-common \
-    php7-cli \
     php7-fpm \
-    php7-curl \
     php7-sqlite3 \
     php7-pdo_sqlite \
-    php7-iconv \
-    php7-json \
+#    
     php7-ctype \
-    php7-zip \
-    php7-cgi \
-    php7-session \
+    php7-curl \
+    php7-iconv \
     php7-mbstring \
-    php7-xml \
-    php7-simplexml \
     php7-pdo \
+    php7-simplexml \
+    php7-xml \
+    php7-zip \
+#    
+    php7-cli \
+    php7-cgi \    
+    php7-json \
+#    php7-session \
     gnu-libiconv \
     musl-utils && \
     wget -q http://korphome.ru/torrent_monitor/tm-latest.zip -O /tmp/tm-latest.zip && \
@@ -74,23 +74,20 @@ RUN apk update && \
     ln -sf /dev/stdout /var/log/php-fpm.log && \
     apk del --purge deps; rm -rf /tmp/* /var/cache/apk/* && \ 
     chmod u+x /init
-
 #------------------------------------------------------------------------------
 # Set labels:
 #------------------------------------------------------------------------------
 LABEL ru.korphome.version="${VERSION}" \
       ru.korphome.release-date="${RELEASE_DATE}"
-
 #------------------------------------------------------------------------------
 # Set volumes, workdir, expose ports and entrypoint:
-# /scripts - for http-knocking starting script
-# /root/.config/rclone - for rclone config file
+# /scripts - for http-knocking starting script and rclone config file
 # /data/htdocs/torrents - for download .torrent files
 #------------------------------------------------------------------------------
 VOLUME ["/data/htdocs/db", "/data/htdocs/torrents", "/scripts"]
 WORKDIR /
 #------------------------------------------------------------------------------
-# port 80 for TorMon port 2000 for http-knocking:
+# port 80 for direct TorMon; port 2000 for access through http-knocking:
 #------------------------------------------------------------------------------
 EXPOSE 80 2000
 ENTRYPOINT ["/init"]
