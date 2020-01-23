@@ -18,24 +18,6 @@ ENV VERSION="1.8.1" \
 COPY rootfs /
 #------------------------------------------------------------------------------
 # Install:
-### php modules from nawa/torrentmonitor
-# php7-common 
-# php7-fpm 
-# php7-sqlite3 
-# php7-pdo_sqlite 
-### php modules from tormon.ru:  
-# php7-ctype 
-# php7-curl 
-# php7-iconv 
-# php7-mbstring 
-# php7-pdo 
-# php7-simplexml 
-# php7-xml 
-# php7-zip
-### forum.korphome.ru/viewtopic.php?f=3&t=138 
-# php7-cli 
-# php7-cgi 
-# php7-json
 #------------------------------------------------------------------------------
 RUN apk update && \
     apk upgrade && \
@@ -47,8 +29,7 @@ RUN apk update && \
     php7-common \
     php7-fpm \
     php7-sqlite3 \
-    php7-pdo_sqlite \
-#    
+    php7-pdo_sqlite \    
     php7-ctype \
     php7-curl \
     php7-iconv \
@@ -56,12 +37,11 @@ RUN apk update && \
     php7-pdo \
     php7-simplexml \
     php7-xml \
-    php7-zip \
-#    
+    php7-zip \   
     php7-cli \
     php7-cgi \    
     php7-json \
-#    php7-session \
+    php7-session \
     gnu-libiconv \
     musl-utils && \
     wget -q http://korphome.ru/torrent_monitor/tm-latest.zip -O /tmp/tm-latest.zip && \
