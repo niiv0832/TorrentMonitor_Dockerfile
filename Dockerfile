@@ -21,11 +21,30 @@ COPY rootfs /
 
 #------------------------------------------------------------------------------
 # Install:
+# 
+# php modules from tormon.ru:  
+# php-mod-ctype 
+# php-mod-curl 
+# php-mod-iconv 
+# php-mod-mbstring 
+# php-mod-pdo 
+# php-mod-simplexml 
+# php-mod-xml 
+# php-mod-zip
+# php7.0-cli 
+# php7.0-cgi 
+# php7.0-curl 
+# php7.0-json 
+# php7.0-mbstring 
+# php7.0-mysql 
+# php7.0-xml 
+# php7.0-zip
 #------------------------------------------------------------------------------
 RUN apk update && \
     apk upgrade && \
     apk --no-cache add --update -t deps wget unzip sqlite tar re2c file curl && \
     apk --no-cache add \
+    bash \
     nginx \
     php7-common \
     php7-cli \
@@ -44,10 +63,7 @@ RUN apk update && \
     php7-simplexml \
     php7-pdo \
     gnu-libiconv \
-    bash \
-    npm \
     musl-utils && \
-    apk --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing add rclone && \
     wget -q http://korphome.ru/torrent_monitor/tm-latest.zip -O /tmp/tm-latest.zip && \
     unzip /tmp/tm-latest.zip -d /tmp/ && \
     mv /tmp/TorrentMonitor-master/* /data/htdocs && \
@@ -71,7 +87,7 @@ LABEL ru.korphome.version="${VERSION}" \
 # /root/.config/rclone - for rclone config file
 # /data/htdocs/torrents - for download .torrent files
 #------------------------------------------------------------------------------
-VOLUME ["/data/htdocs/db", "/data/htdocs/torrents", "/scripts", "/root/.config/rclone"]
+VOLUME ["/data/htdocs/db", "/data/htdocs/torrents", "/scripts"]
 WORKDIR /
 #------------------------------------------------------------------------------
 # port 80 for TorMon port 2000 for http-knocking:
