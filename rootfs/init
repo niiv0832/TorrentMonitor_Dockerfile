@@ -21,6 +21,9 @@ chown -R nginx:nginx /data/htdocs
 # Write temp files by nginx
 chmod 777 /tmp
 
+# log for cron
+touch /var/log/nginx/torrentmonitor_cron_error.log
+
 #check http-knocking start script
 if [ -f /scripts/httpknocking.sh ];
 # copy and run http-knocking start script
