@@ -43,7 +43,7 @@ then
 apk --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing add rclone
 rm -rf /var/cache/apk/*
 mkdir -p /root/.config/rclone/
-cp /scripts/rclonesync.sh /root/.config/rclone/rclone.conf
+cp /scripts/rclone.conf /root/.config/rclone/rclone.conf
 cp /scripts/rclonesync.sh /rclonesync.sh
 chmod u+x /rclonesync.sh
 echo "1-59/2 * * * * /rclonesync.sh 2>&1" >> /var/spool/cron/crontabs/root
