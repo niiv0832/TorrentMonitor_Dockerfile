@@ -29,8 +29,9 @@ RUN apk update && \
     wget \
     unzip \
     nginx \
-    mariadb \
-    mariadb-client \
+    musl \
+    sqlite \
+    sqlite-libs \
     php7 \
     php7-bcmath \
     php7-gd \
