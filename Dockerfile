@@ -22,7 +22,7 @@ COPY rootfs /
 RUN apk update && \
     apk upgrade && \
 #    delete from original: tar re2c file curl sqlite
-    apk --no-cache add --update -t deps wget unzip && \
+###    apk --no-cache add --update -t deps wget unzip && \
     apk --no-cache add \
     bash \
     curl \
@@ -43,7 +43,7 @@ RUN apk update && \
     php7-common \
     php7-fpm \
     php7-sqlite3 \
-    php7-pdo_sqlite3 \
+    php7-pdo_sqlite \
     php7-cgi \    
     php7-ctype \
     php7-curl \
@@ -67,7 +67,8 @@ RUN apk update && \
     ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log && \
     ln -sf /dev/stdout /var/log/php-fpm.log && \
-    apk del --purge deps; rm -rf /tmp/* /var/cache/apk/* && \ 
+###    apk del --purge deps; rm -rf /tmp/* /var/cache/apk/* && \
+    rm -rf /tmp/* /var/cache/apk/* && \
     chmod u+x /init
 #------------------------------------------------------------------------------
 # Set labels:
