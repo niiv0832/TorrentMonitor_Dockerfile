@@ -21,12 +21,16 @@ COPY rootfs /
 #------------------------------------------------------------------------------
 RUN apk update && \
     apk upgrade && \
-#    delete from original: tar re2c file curl
-    apk --no-cache add --update -t deps wget unzip sqlite && \
+#    delete from original: tar re2c file curl sqlite
+    apk --no-cache add --update -t deps wget unzip && \
     apk --no-cache add \
     bash \
     curl \
+    wget \
+    unzip \
     nginx \
+    mariadb \
+    mariadb-client \
     php7 \
     php7-bcmath \
     php7-gd \
@@ -38,7 +42,8 @@ RUN apk update && \
     php7-common \
     php7-fpm \
     php7-sqlite3 \
-    php7-pdo_sqlite \    
+    php7-pdo_sqlite3 \
+    php7-cgi \    
     php7-ctype \
     php7-curl \
     php7-iconv \
