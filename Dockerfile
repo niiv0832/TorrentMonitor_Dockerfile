@@ -11,7 +11,7 @@ ENV VERSION="1.8.2" \
     CRON_TIMEOUT="0/10 * * * *" \
     PHP_TIMEZONE="UTC" \
     PHP_MEMORY_LIMIT="512M" \
-    LD_PRELOAD="/usr/lib/preloadable_libiconv.so"
+    LD_PRELOAD="/usr/local/lib/preloadable_libiconv.so"
 #------------------------------------------------------------------------------
 # Populate root file system:
 #------------------------------------------------------------------------------
@@ -23,15 +23,15 @@ RUN apk update && \
     apk upgrade && \
 #    delete from original: tar re2c file curl sqlite
 ###    apk --no-cache add --update -t deps wget unzip && \
+#------------------------------------------------------------------------------
+# Temporarily install build environment 
+#------------------------------------------------------------------------------
+    apk --no-cache add --update -t deps wget unzip sqlite build-base tar re2c make file curl && \
+#------------------------------------------------------------------------------
+# Install nginx and php7
+#------------------------------------------------------------------------------
     apk --no-cache add \
-    bash \
-    curl \
-    wget \
-    unzip \
     nginx \
-    musl \
-    sqlite \
-    sqlite-libs \
     php7 \
     php7-bcmath \
     php7-gd \
@@ -39,7 +39,7 @@ RUN apk update && \
     php7-pecl-mcrypt \
     php7-soap \
     php7-tidy \
-    php-xmlrpc \
+    php7-xmlrpc \
     php7-common \
     php7-fpm \
     php7-sqlite3 \
@@ -56,9 +56,10 @@ RUN apk update && \
     php7-cli \
     php7-cgi \    
     php7-json \
-    php7-session \
-    gnu-libiconv \
-    musl-utils && \
+    php7-session && \
+#------------------------------------------------------------------------------
+# Download and install TM 
+#------------------------------------------------------------------------------
     wget -q http://korphome.ru/torrent_monitor/tm-latest.zip -O /tmp/tm-latest.zip && \
     unzip /tmp/tm-latest.zip -d /tmp/ && \
     mv /tmp/TorrentMonitor-master/* /data/htdocs && \
@@ -67,8 +68,22 @@ RUN apk update && \
     ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log && \
     ln -sf /dev/stdout /var/log/php-fpm.log && \
-###    apk del --purge deps; rm -rf /tmp/* /var/cache/apk/* && \
-    rm -rf /tmp/* /var/cache/apk/* && \
+#------------------------------------------------------------------------------
+# Build proper libiconv
+#------------------------------------------------------------------------------     
+    rm /usr/bin/iconv && \
+    curl -SL http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz | tar -xz -C /tmp && \
+    cd /tmp/libiconv-1.14 && patch -p1 < /tmp/iconv-patch.patch && \
+    ./configure --prefix=/usr/local && \
+    make && make install && \
+#------------------------------------------------------------------------------
+# Cleanup
+#------------------------------------------------------------------------------    
+    apk del --purge deps; rm -rf /tmp/* /var/cache/apk/* && \
+###    rm -rf /tmp/* /var/cache/apk/* && \
+#------------------------------------------------------------------------------
+# Make /init executables 
+#------------------------------------------------------------------------------ 
     chmod u+x /init
 #------------------------------------------------------------------------------
 # Set labels:
