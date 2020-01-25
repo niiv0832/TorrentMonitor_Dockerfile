@@ -58,7 +58,7 @@ fi
 
 # Start apps
 crond
-php-fpm7
+php-fpm
 nginx -g 'daemon off;'
 
 #tail -f /dev/null
