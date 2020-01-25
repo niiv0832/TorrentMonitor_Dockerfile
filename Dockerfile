@@ -31,32 +31,45 @@ RUN apk update && \
 # Install nginx and php7
 #------------------------------------------------------------------------------
     apk --no-cache add \
-    nginx \
-    php7 \
-    php7-bcmath \
-    php7-gd \
-    php7-imap \
-    php7-pecl-mcrypt \
-    php7-soap \
-    php7-tidy \
-    php7-xmlrpc \
-    php7-common \
-    php7-fpm \
-    php7-sqlite3 \
-    php7-pdo_sqlite \
-    php7-cgi \    
-    php7-ctype \
-    php7-curl \
-    php7-iconv \
-    php7-mbstring \
-    php7-pdo \
-    php7-simplexml \
-    php7-xml \
-    php7-zip \   
-    php7-cli \
-    php7-cgi \    
-    php7-json \
-    php7-session && \
+    nginx && \
+    apk --repository=http://dl-cdn.alpinelinux.org/alpine/v3.8/community add \
+    php5-common \
+    php5-cli \
+    php5-fpm \
+    php5-curl \
+    php5-sqlite3 \
+#    php5-mysql \
+    php5-pdo_sqlite \
+    php5-iconv \
+    php5-json \
+    php5-ctype \
+    php5-zip && \
+    
+#    php7 \
+#    php7-bcmath \
+#    php7-gd \
+#    php7-imap \
+#    php7-pecl-mcrypt \
+#    php7-soap \
+#    php7-tidy \
+#    php7-xmlrpc \
+#    php7-common \
+#    php7-fpm \
+#    php7-sqlite3 \
+#    php7-pdo_sqlite \
+#    php7-cgi \    
+#    php7-ctype \
+#    php7-curl \
+#    php7-iconv \
+#    php7-mbstring \
+#    php7-pdo \
+#    php7-simplexml \
+#    php7-xml \
+#    php7-zip \   
+#    php7-cli \
+#    php7-cgi \    
+#    php7-json \
+#    php7-session && \
 #------------------------------------------------------------------------------
 # Download and install TM 
 #------------------------------------------------------------------------------
