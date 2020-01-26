@@ -1,7 +1,7 @@
 #------------------------------------------------------------------------------
 # Set the base image for subsequent instructions:
 #------------------------------------------------------------------------------
-FROM alpine:3.5
+FROM alpine:3.8
 MAINTAINER nniiv0832 <dockerhubme-tormon@yahoo.com>
 #------------------------------------------------------------------------------
 # Environment variables:
