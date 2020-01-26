@@ -23,11 +23,16 @@ chmod 777 /tmp
 
 # log for cron
 touch /var/log/nginx/torrentmonitor_cron_error.log
+mkdir -p /var/statusapp
 
 #check http-knocking start script
 if [ -f /scripts/httpknocking.sh ];
 # copy and run http-knocking start script
 then
+if [ -f /var/statusapp/httpknocking.done ]
+then
+echo “http-knocking was added previously.”
+else
 echo -e “Install httpknocking.”
 echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories
 apk --no-cache --repository="http://dl-cdn.alpinelinux.org/alpine/edge/community" add nodejs-current
@@ -37,7 +42,9 @@ npm install -g http-knocking
 cp /scripts/httpknocking.sh /httpknocking.sh
 chmod u+x /httpknocking.sh
 /httpknocking.sh
+touch /var/statusapp/httpknocking.done 
 #messging if http-knocking start script hadn't finded
+fi
 else
 echo -e "No http-knockig script.Rerun container with expose only port 80 for direct access to TorMon webui!"
 fi
@@ -46,6 +53,10 @@ fi
 if [ -f /scripts/rclonesync.sh ];
 # copy and run rclone start script
 then
+if [ -f /var/statusapp/rclone.done ]
+then
+echo “rclone was added previously.”
+else
 echo -e “Install rclone.”
 apk update
 apk upgrade
@@ -67,7 +78,9 @@ cp /scripts/rclone.conf /root/.config/rclone/rclone.conf
 cp /scripts/rclonesync.sh /rclonesync.sh
 chmod u+x /rclonesync.sh
 echo "1-59/2 * * * * /rclonesync.sh" >> /var/spool/cron/crontabs/root
+touch /var/statusapp/rclone.done
 #messging if rclone start script hadn't finded
+fi
 else
 #head -n -1 /var/spool/cron/crontabs/root > /var/spool/cron/crontabs/root.tmp ; mv /var/spool/cron/crontabs/root.tmp /var/spool/cron/crontabs/root
 echo -e “No rclone script. rclone remove from cron.”
