@@ -1,7 +1,7 @@
 #------------------------------------------------------------------------------
 # Set the base image for subsequent instructions:
 #------------------------------------------------------------------------------
-FROM alpine:3.8
+FROM alpine:latest
 MAINTAINER nniiv0832 <dockerhubme-tormon@yahoo.com>
 #------------------------------------------------------------------------------
 # Environment variables:
@@ -32,7 +32,9 @@ RUN apk update && \
 #------------------------------------------------------------------------------
     apk --no-cache add \
     bash \
-    nginx \ 
+    nginx && \
+    echo "http://dl-cdn.alpinelinux.org/alpine/v3.8/main" >> /etc/apk/repositories
+    apk --no-cache --repository="http://dl-cdn.alpinelinux.org/alpine/v3.8/community" add
     php5-common \
     php5-cli \
     php5-fpm \
