@@ -31,7 +31,7 @@ then
 echo -e “Install httpknocking.”
 apk update
 apk upgrade
-apk --update --no-cache add npm
+apk --update --no-cache add nodejs
 rm -rf /var/cache/apk/*
 npm install -g http-knocking
 cp /scripts/httpknocking.sh /httpknocking.sh
