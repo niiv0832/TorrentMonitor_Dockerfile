@@ -28,6 +28,9 @@ touch /var/log/nginx/torrentmonitor_cron_error.log
 if [ -f /scripts/httpknocking.sh ];
 # copy and run http-knocking start script
 then
+echo -e “Install httpknocking.”
+apk update
+apk upgrade
 apk --update --no-cache add npm
 rm -rf /var/cache/apk/*
 npm install -g http-knocking
@@ -43,8 +46,22 @@ fi
 if [ -f /scripts/rclonesync.sh ];
 # copy and run rclone start script
 then
-apk --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing add rclone
+echo -e “Install rclone.”
+apk update
+apk upgrade
+apk --update --no-cache add curl unzip
+mkdir -p /tmp/rclone
+cd /tmp/rclone
+curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip
+apk del curl
+unzip rclone-current-linux-amd64.zip
+apk del unzip
+cd /tmp/rclone/rclone-*-linux-amd64
+sudo cp rclone /usr/bin/
+sudo chown root:root /usr/bin/rclone
+sudo chmod 755 /usr/bin/rclone
 rm -rf /var/cache/apk/*
+rm -rf /tmp/rclone
 mkdir -p /root/.config/rclone/
 cp /scripts/rclone.conf /root/.config/rclone/rclone.conf
 cp /scripts/rclonesync.sh /rclonesync.sh
@@ -61,4 +78,4 @@ crond
 php-fpm
 nginx -g 'daemon off;'
 
-#tail -f /dev/null
+tail -f /dev/null
