@@ -57,16 +57,16 @@ apk del curl
 unzip rclone-current-linux-amd64.zip
 apk del unzip
 cd /tmp/rclone/rclone-*-linux-amd64
-sudo cp rclone /usr/bin/
-sudo chown root:root /usr/bin/rclone
-sudo chmod 755 /usr/bin/rclone
+cp rclone /usr/bin/
+chown root:root /usr/bin/rclone
+chmod 755 /usr/bin/rclone
 rm -rf /var/cache/apk/*
 rm -rf /tmp/rclone
 mkdir -p /root/.config/rclone/
 cp /scripts/rclone.conf /root/.config/rclone/rclone.conf
 cp /scripts/rclonesync.sh /rclonesync.sh
 chmod u+x /rclonesync.sh
-echo "1-59/2 * * * * /rclonesync.sh 2>&1" >> /var/spool/cron/crontabs/root
+echo "1-59/2 * * * * /rclonesync.sh" >> /var/spool/cron/crontabs/root
 #messging if rclone start script hadn't finded
 else
 #head -n -1 /var/spool/cron/crontabs/root > /var/spool/cron/crontabs/root.tmp ; mv /var/spool/cron/crontabs/root.tmp /var/spool/cron/crontabs/root
@@ -78,4 +78,4 @@ crond
 /usr/bin/php-fpm5
 nginx -g 'daemon off;'
 
-tail -f /dev/null
+#tail -f /dev/null
