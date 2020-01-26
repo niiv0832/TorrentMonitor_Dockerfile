@@ -33,6 +33,7 @@ RUN apk update && \
     apk --no-cache add \
     bash \
     nginx && \
+    cp /etc/apk/repositories /etc/apk.repositories.tmp && \
     echo "http://dl-cdn.alpinelinux.org/alpine/v3.8/main" >> /etc/apk/repositories && \
     apk --no-cache --repository="http://dl-cdn.alpinelinux.org/alpine/v3.8/community" add \
     php5-common \
@@ -46,6 +47,11 @@ RUN apk update && \
     php5-json \
     php5-ctype \
     php5-zip && \
+    rm /etc/apk/repositories && \
+    mv /etc/apk.repositories.tmp /etc/apk/repositories && \
+    apk update && \
+    apk upgrade && \
+    
 #------------------------------------------------------------------------------
 # Download and install TM 
 #------------------------------------------------------------------------------
