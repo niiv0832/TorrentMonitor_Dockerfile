@@ -31,6 +31,7 @@ RUN apk update && \
 # Install nginx and php7
 #------------------------------------------------------------------------------
     apk --no-cache add \
+    bash \
     nginx \ 
     php5-common \
     php5-cli \
