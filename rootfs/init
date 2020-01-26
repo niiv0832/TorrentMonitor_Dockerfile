@@ -29,9 +29,9 @@ if [ -f /scripts/httpknocking.sh ];
 # copy and run http-knocking start script
 then
 echo -e “Install httpknocking.”
-echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories
-apk --no-cache --repository="http://dl-cdn.alpinelinux.org/alpine/edge/community" add nodejs-current
-apk --no-cache --repository="http://dl-cdn.alpinelinux.org/alpine/edge/community" add npm
+echo "http://dl-cdn.alpinelinux.org/alpine/v3.11/main" >> /etc/apk/repositories
+apk --no-cache --repository="http://dl-cdn.alpinelinux.org/alpine/v3.11/main" add nodejs
+apk --no-cache --repository="http://dl-cdn.alpinelinux.org/alpine/v3.11/main" add npm
 rm -rf /var/cache/apk/*
 npm install -g http-knocking
 cp /scripts/httpknocking.sh /httpknocking.sh
@@ -75,7 +75,7 @@ fi
 
 # Start apps
 crond
-/usr/bin/php-fpm5
+php-fpm
 nginx -g 'daemon off;'
 
 #tail -f /dev/null
