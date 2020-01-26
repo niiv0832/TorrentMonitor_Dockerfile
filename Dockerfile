@@ -20,15 +20,22 @@ COPY rootfs /
 # Install:
 #------------------------------------------------------------------------------
 RUN \
-# apk update && \
-#    apk upgrade && \
-#    delete from original: tar re2c file curl sqlite
-###    apk --no-cache add --update -t deps wget unzip && \
-
+    apk update && \
+    apk upgrade && \
+#------------------------------------------------------------------------------
+# Temporarily install build environment 
+#------------------------------------------------------------------------------
+    apk --update --no-cache add -t deps wget unzip sqlite build-base tar re2c make file curl && \
+#------------------------------------------------------------------------------
+# Install nginx from alpine:latest
+#------------------------------------------------------------------------------
+    apk --update --no-cache add \
+    bash \
+    nginx && \
 #------------------------------------------------------------------------------
 # Install php5 from alpine:3.8
 #------------------------------------------------------------------------------
-    cp /etc/apk/repositories /etc/apk.repositories.tmp && \
+#    cp /etc/apk/repositories /etc/apk.repositories.tmp && \
     echo "http://dl-cdn.alpinelinux.org/alpine/v3.8/main" >> /etc/apk/repositories && \
     apk --no-cache --repository="http://dl-cdn.alpinelinux.org/alpine/v3.8/community" add \
     php5-common \
@@ -42,20 +49,8 @@ RUN \
     php5-json \
     php5-ctype \
     php5-zip && \
-    rm /etc/apk/repositories && \
-    mv /etc/apk.repositories.tmp /etc/apk/repositories && \
-#------------------------------------------------------------------------------
-# Install nginx from alpine:latest
-#------------------------------------------------------------------------------
-    apk update && \
-    apk upgrade && \
-    apk --update --no-cache add \
-    bash \
-    nginx && \
-#------------------------------------------------------------------------------
-# Temporarily install build environment 
-#------------------------------------------------------------------------------
-    apk --update --no-cache add -t deps wget unzip sqlite build-base tar re2c make file curl && \
+#    rm /etc/apk/repositories && \
+#    mv /etc/apk.repositories.tmp /etc/apk/repositories && \
 #------------------------------------------------------------------------------
 # Download and install TM 
 #------------------------------------------------------------------------------
