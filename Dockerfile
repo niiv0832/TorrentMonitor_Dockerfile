@@ -21,6 +21,19 @@ COPY rootfs /
 #------------------------------------------------------------------------------
 RUN apt update && \
     apt upgrade && \
+#------------------------------------------------------------------------------
+# Install: preloadable_libiconv.so
+#------------------------------------------------------------------------------
+    apt install -y build-essential && \
+    curl -SL http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.15.tar.gz | tar -xz -C /tmp && \
+    cd /tmp/libiconv-1.15 && \
+    ./configure --prefix=/usr/local && \
+    make && make install && \
+    apt remove -y build-essential && \
+    apt autoremove -y && \    
+#------------------------------------------------------------------------------
+# Install: nginx and php
+#-----------------------------------------------------------------------------    
     apt -y install \
                     bash \
                     cron \
@@ -73,16 +86,6 @@ RUN apt update && \
     chown root:root /bin/rclone && \
     chmod 755 /bin/rclone && \
     rm -rf /tmp/rclone && \
-#------------------------------------------------------------------------------
-# Install: preloadable_libiconv.so
-#------------------------------------------------------------------------------
-    apt install -y build-essential && \
-    curl -SL http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.15.tar.gz | tar -xz -C /tmp && \
-    cd /tmp/libiconv-1.15 && \
-    ./configure --prefix=/usr/local && \
-    make && make install && \
-    apt remove -y build-essential && \
-    apt autoremove -y && \
 #------------------------------------------------------------------------------
 # clean
 #------------------------------------------------------------------------------
