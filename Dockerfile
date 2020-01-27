@@ -12,7 +12,7 @@ ENV VERSION="1.8.2" \
     CRON_TIMEOUT="0/10 * * * *" \
     PHP_TIMEZONE="UTC" \
     PHP_MEMORY_LIMIT="512M"
-#    LD_PRELOAD="/usr/lib/preloadable_libiconv.so php"
+    LD_PRELOAD="/usr/lib/preloadable_libiconv.so"
 #------------------------------------------------------------------------------
 # Populate root file system:
 #------------------------------------------------------------------------------
@@ -74,6 +74,25 @@ RUN apt update && \
     chown root:root /bin/rclone && \
     chmod 755 /bin/rclone && \
     rm -rf /tmp/rclone && \
+#------------------------------------------------------------------------------
+# Install: preloadable_libiconv.so
+#------------------------------------------------------------------------------
+    apt install -y build-essential && \
+    curl -SL http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.15.tar.gz | tar -xz -C /tmp && \
+    cd /tmp/libiconv-1.15 && \
+    ./configure --prefix=/usr/local && \
+    make && make install && \
+    apt remove -y build-essential && \
+    apt autoremove -y && \
+#------------------------------------------------------------------------------
+# clean
+#------------------------------------------------------------------------------
+    apt remove -y sqlite3 curl wget unzip && \
+    apt purge -y && \
+    apt autoremove -y && \
+    apt autoclean -y && \
+    
+     
 #------------------------------------------------------------------------------
 # Make ENTRYPOINT executable 
 #------------------------------------------------------------------------------
