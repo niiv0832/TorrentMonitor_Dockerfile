@@ -28,9 +28,9 @@ touch /var/log/nginx/torrentmonitor_cron_error.log
 if [ -f /scripts/httpknocking.sh ];
 # copy and run http-knocking start script
 then
-apk --update --no-cache add npm
-rm -rf /var/cache/apk/*
-npm install -g http-knocking
+#apk --update --no-cache add npm
+#rm -rf /var/cache/apk/*
+#npm install -g http-knocking
 cp /scripts/httpknocking.sh /httpknocking.sh
 chmod u+x /httpknocking.sh
 /httpknocking.sh
@@ -41,15 +41,15 @@ fi
 
 #check rclone start script
 if [ -f /scripts/rclonesync.sh ];
-# copy and run rclone start script
+## copy and run rclone start script
 then
-apk --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing add rclone
-rm -rf /var/cache/apk/*
-mkdir -p /root/.config/rclone/
+#apk --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing add rclone
+#rm -rf /var/cache/apk/*
+#mkdir -p /root/.config/rclone/
 cp /scripts/rclone.conf /root/.config/rclone/rclone.conf
 cp /scripts/rclonesync.sh /rclonesync.sh
 chmod u+x /rclonesync.sh
-echo "1-59/2 * * * * /rclonesync.sh 2>&1" >> /var/spool/cron/crontabs/root
+#echo "1-59/2 * * * * /rclonesync.sh 2>&1" >> /var/spool/cron/crontabs/root
 #messging if rclone start script hadn't finded
 else
 #head -n -1 /var/spool/cron/crontabs/root > /var/spool/cron/crontabs/root.tmp ; mv /var/spool/cron/crontabs/root.tmp /var/spool/cron/crontabs/root
@@ -57,8 +57,8 @@ echo -e “No rclone script. rclone remove from cron.”
 fi
 
 # Start apps
-crond
-php-fpm7
-nginx -g 'daemon off;'
+service cron start 
+service php7.3-fpm start 
+service nginx start 
 
-#tail -f /dev/null
+tail -f /dev/null
