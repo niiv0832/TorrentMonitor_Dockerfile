@@ -10,8 +10,9 @@ ENV VERSION="1.8.2" \
     RELEASE_DATE="03.01.2020" \
     CRON_TIMEOUT="0/10 * * * *" \
     PHP_TIMEZONE="UTC" \
-    PHP_MEMORY_LIMIT="512M" \
-    LD_PRELOAD="/usr/lib/preloadable_libiconv.so"
+    PHP_MEMORY_LIMIT="512M" 
+    #\
+#    LD_PRELOAD="/usr/lib/preloadable_libiconv.so"
 #------------------------------------------------------------------------------
 # Populate root file system:
 #------------------------------------------------------------------------------
@@ -25,14 +26,14 @@ RUN apk update && \
 ###    apk --no-cache add --update -t deps wget unzip && \
     apk --no-cache add \
     bash \
-    curl \
+#    curl \
     wget \
     unzip \
     nginx \
-    musl \
+#    musl \
     sqlite \
-    sqlite-libs \
-    php7 \
+#    sqlite-libs \
+#    php7 \
     php7-bcmath \
     php7-gd \
     php7-imap \
@@ -56,9 +57,9 @@ RUN apk update && \
     php7-cli \
     php7-cgi \    
     php7-json \
-    php7-session \
-    gnu-libiconv \
-    musl-utils && \
+    php7-session && \
+    #gnu-libiconv \
+ #   musl-utils && \
     wget -q http://korphome.ru/torrent_monitor/tm-latest.zip -O /tmp/tm-latest.zip && \
     unzip /tmp/tm-latest.zip -d /tmp/ && \
     mv /tmp/TorrentMonitor-master/* /data/htdocs && \
@@ -68,6 +69,7 @@ RUN apk update && \
     ln -sf /dev/stderr /var/log/nginx/error.log && \
     ln -sf /dev/stdout /var/log/php-fpm.log && \
 ###    apk del --purge deps; rm -rf /tmp/* /var/cache/apk/* && \
+    apk del  --purge sqlite wget unzip  && \
     rm -rf /tmp/* /var/cache/apk/* && \
     chmod u+x /init
 #------------------------------------------------------------------------------
