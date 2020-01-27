@@ -2,7 +2,6 @@
 # Set the base image for subsequent instructions:
 #------------------------------------------------------------------------------
 FROM node:buster-slim
-
 MAINTAINER nniiv0832 <dockerhubme-tormon@yahoo.com>
 #------------------------------------------------------------------------------
 # Environment variables:
@@ -49,7 +48,7 @@ RUN apt update && \
 #------------------------------------------------------------------------------  
     wget -q http://korphome.ru/torrent_monitor/tm-latest.zip -O /tmp/tm-latest.zip && \
     unzip /tmp/tm-latest.zip -d /tmp/ && \
-    mkdir -p /data/htdocs
+    mkdir -p /data/htdocs && \
     mv /tmp/TorrentMonitor-master/* /data/htdocs && \
     cat /data/htdocs/db_schema/sqlite.sql | sqlite3 /data/htdocs/db_schema/tm.sqlite && \
     mkdir -p /var/log/nginx/ && \
@@ -90,9 +89,7 @@ RUN apt update && \
     apt remove -y sqlite3 curl wget unzip && \
     apt purge -y && \
     apt autoremove -y && \
-    apt autoclean -y && \
-    
-     
+    apt autoclean -y && \    
 #------------------------------------------------------------------------------
 # Make ENTRYPOINT executable 
 #------------------------------------------------------------------------------
