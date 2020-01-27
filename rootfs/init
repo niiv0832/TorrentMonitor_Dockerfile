@@ -5,12 +5,16 @@ test -f /data/htdocs/db/tm.sqlite || cp /data/htdocs/db_schema/tm.sqlite /data/h
 
 # Configure system
 # Set PHP timezone
-sed -i "s#PHP_TIMEZONE#${PHP_TIMEZONE}#" /etc/php7/php.ini
-sed -i "s#PHP_TIMEZONE#${PHP_TIMEZONE}#" /etc/php7/cli/php.ini
+sed -i "s#PHP_TIMEZONE#${PHP_TIMEZONE}#" /etc/php/7.3/php.ini
+sed -i "s#PHP_TIMEZONE#${PHP_TIMEZONE}#" /etc/php/7.3/cli/php.ini
+sed -i "s#PHP_TIMEZONE#${PHP_TIMEZONE}#" /etc/php/7.3/cgi/php.ini
+sed -i "s#PHP_TIMEZONE#${PHP_TIMEZONE}#" /etc/php/7.3/fpm/php.ini
 
 # Set PHP memory limit
-sed -i "s#PHP_MEMORY_LIMIT#${PHP_MEMORY_LIMIT}#" /etc/php7/php.ini
-sed -i "s#PHP_MEMORY_LIMIT#${PHP_MEMORY_LIMIT}#" /etc/php7/cli/php.ini
+sed -i "s#PHP_MEMORY_LIMIT#${PHP_MEMORY_LIMIT}#" /etc/php/7.3/php.ini
+sed -i "s#PHP_MEMORY_LIMIT#${PHP_MEMORY_LIMIT}#" /etc/php/7.3/cli/php.ini
+sed -i "s#PHP_MEMORY_LIMIT#${PHP_MEMORY_LIMIT}#" /etc/php/7.3/cgi/php.ini
+sed -i "s#PHP_MEMORY_LIMIT#${PHP_MEMORY_LIMIT}#" /etc/php/7.3/fpm/php.ini
 
 # Set cront timeuot for engine.php
 sed -i "s#CRON_TIMEOUT#${CRON_TIMEOUT}#" /var/spool/cron/crontabs/root
@@ -28,31 +32,20 @@ touch /var/log/nginx/torrentmonitor_cron_error.log
 if [ -f /scripts/httpknocking.sh ];
 # copy and run http-knocking start script
 then
-#apk --update --no-cache add npm
-#rm -rf /var/cache/apk/*
-#npm install -g http-knocking
 cp /scripts/httpknocking.sh /httpknocking.sh
 chmod u+x /httpknocking.sh
 /httpknocking.sh
-#messging if http-knocking start script hadn't finded
 else
 echo -e "No http-knockig script.Rerun container with expose only port 80 for direct access to TorMon webui!"
 fi
 
 #check rclone start script
 if [ -f /scripts/rclonesync.sh ];
-## copy and run rclone start script
 then
-#apk --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing add rclone
-#rm -rf /var/cache/apk/*
-#mkdir -p /root/.config/rclone/
 cp /scripts/rclone.conf /root/.config/rclone/rclone.conf
 cp /scripts/rclonesync.sh /rclonesync.sh
 chmod u+x /rclonesync.sh
-#echo "1-59/2 * * * * /rclonesync.sh 2>&1" >> /var/spool/cron/crontabs/root
-#messging if rclone start script hadn't finded
 else
-#head -n -1 /var/spool/cron/crontabs/root > /var/spool/cron/crontabs/root.tmp ; mv /var/spool/cron/crontabs/root.tmp /var/spool/cron/crontabs/root
 echo -e “No rclone script. rclone remove from cron.”
 fi
 
