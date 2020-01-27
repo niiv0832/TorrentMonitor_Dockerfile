@@ -33,11 +33,11 @@ RUN \
     bash \
     nginx && \
 #------------------------------------------------------------------------------
-# Install php5 from alpine:3.8
+# Install php5 from alpine:3.5
 #------------------------------------------------------------------------------
 #    cp /etc/apk/repositories /etc/apk.repositories.tmp && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/v3.8/main" >> /etc/apk/repositories && \
-    apk --no-cache --repository="http://dl-cdn.alpinelinux.org/alpine/v3.8/community" add \
+    echo "http://dl-cdn.alpinelinux.org/alpine/v3.5/main" >> /etc/apk/repositories && \
+    apk --no-cache --repository="http://dl-cdn.alpinelinux.org/alpine/v3.5/main" add \
     php5-common \
     php5-cli \
     php5-fpm \
