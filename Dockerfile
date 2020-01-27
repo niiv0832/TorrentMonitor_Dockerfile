@@ -87,9 +87,9 @@ RUN apt update && \
 # clean
 #------------------------------------------------------------------------------
     apt remove -y sqlite3 curl wget unzip && \
-    apt purge -y && \
-    apt autoremove -y && \
-    apt autoclean -y && \    
+#    apt purge -y && \
+#    apt autoremove -y && \
+#    apt autoclean -y && \    
 #------------------------------------------------------------------------------
 # Make ENTRYPOINT executable 
 #------------------------------------------------------------------------------
