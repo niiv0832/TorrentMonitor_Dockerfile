@@ -29,8 +29,8 @@ if [ -f /scripts/httpknocking.sh ];
 # copy and run http-knocking start script
 then
 echo -e “Install httpknocking.”
-apk --no-cache --repository="http://dl-cdn.alpinelinux.org/alpine/v3.11/main" add npm
-rm -rf /var/cache/apk/*
+#apk --no-cache --repository="http://dl-cdn.alpinelinux.org/alpine/v3.11/main" add npm
+#rm -rf /var/cache/apk/*
 npm install -g http-knocking
 cp /scripts/httpknocking.sh /httpknocking.sh
 chmod u+x /httpknocking.sh
