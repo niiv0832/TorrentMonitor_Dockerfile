@@ -11,7 +11,7 @@ ENV VERSION="1.8.2" \
     RELEASE_DATE="03.01.2020" \
     CRON_TIMEOUT="0/10 * * * *" \
     PHP_TIMEZONE="UTC" \
-    PHP_MEMORY_LIMIT="512M"
+    PHP_MEMORY_LIMIT="512M" \
     LD_PRELOAD="/usr/lib/preloadable_libiconv.so"
 #------------------------------------------------------------------------------
 # Populate root file system:
