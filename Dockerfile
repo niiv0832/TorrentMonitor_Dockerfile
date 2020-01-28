@@ -76,7 +76,7 @@ RUN apt-get update -y && \
 #------------------------------------------------------------------------------     
     mkdir -p /tmp/rclone  && \
     cd /tmp/rclone && \
-    wget -q https://downloads.rclone.org/rclone-current-linux-amd64.zip  && \
+    wget -q --no-check-certificate https://downloads.rclone.org/rclone-current-linux-amd64.zip  && \
     unzip rclone-current-linux-amd64.zip && \
     cd /tmp/rclone/rclone-*-linux-amd64 && \
     cp rclone /bin/ && \
