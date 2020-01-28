@@ -53,7 +53,8 @@ RUN apt-get update -y && \
     echo "export LC_ALL=en_US.UTF-8" >> ~/.bashrc && \
     echo "export LANG=en_US.UTF-8" >> ~/.bashrc && \
     echo "export LANGUAGE=en_US.UTF-8" >> ~/.bashrc && \
-    source ~/.bashrc && \
+#    source ~/.bashrc && \
+    . ~/.bashrc && \
 #------------------------------------------------------------------------------
 # Install: TorMon
 #------------------------------------------------------------------------------  
