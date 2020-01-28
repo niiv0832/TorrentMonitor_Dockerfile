@@ -18,16 +18,7 @@ ENV VERSION="1.8.2" \
 #------------------------------------------------------------------------------
 RUN apt update && \
     apt upgrade && \
-#------------------------------------------------------------------------------
-# Install: preloadable_libiconv.so
-#------------------------------------------------------------------------------
-#    apt install -y build-essential && \
-#    curl -SL http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.15.tar.gz | tar -xz -C /tmp && \
-#    cd /tmp/libiconv-1.15 && \
-#    ./configure --prefix=/usr/local && \
-#    make && make install && \
-#    apt remove -y build-essential && \
-#    apt autoremove -y && \    
+    
 #------------------------------------------------------------------------------
 # Install: nginx and php
 #-----------------------------------------------------------------------------    
@@ -39,6 +30,8 @@ RUN apt update && \
                     curl \
                     unzip \
                     sqlite3 \
+                    locales \
+                    language-pack-en\
 #------------------------------------------------------------------------------
 # Install: php
 #------------------------------------------------------------------------------                    
@@ -53,6 +46,15 @@ RUN apt update && \
                     php-xml \
                     php-fpm \
                     php-zip && \
+#------------------------------------------------------------------------------
+# Configuration Locale
+#------------------------------------------------------------------------------
+    sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen && \
+    locale-gen && \
+    echo "export LC_ALL=en_US.UTF-8" >> ~/.bashrc && \
+    echo "export LANG=en_US.UTF-8" >> ~/.bashrc && \
+    echo "export LANGUAGE=en_US.UTF-8" >> ~/.bashrc && \
+    source ~/.bashrc
 #------------------------------------------------------------------------------
 # Install: TorMon
 #------------------------------------------------------------------------------  
