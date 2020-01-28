@@ -54,7 +54,7 @@ RUN apt update && \
     echo "export LC_ALL=en_US.UTF-8" >> ~/.bashrc && \
     echo "export LANG=en_US.UTF-8" >> ~/.bashrc && \
     echo "export LANGUAGE=en_US.UTF-8" >> ~/.bashrc && \
-    source ~/.bashrc
+    source ~/.bashrc && \
 #------------------------------------------------------------------------------
 # Install: TorMon
 #------------------------------------------------------------------------------  
@@ -88,11 +88,10 @@ RUN apt update && \
 #------------------------------------------------------------------------------
 # clean
 #------------------------------------------------------------------------------
-    apt remove -y sqlite3 curl wget unzip
-    # && \
-#    apt purge -y && \
-#    apt autoremove -y && \
-#    apt autoclean -y && \    
+    apt remove -y sqlite3 curl wget unzip && \
+    apt purge -y && \
+    apt autoremove -y && \
+    apt autoclean -y    
 #------------------------------------------------------------------------------
 # Populate root file system:
 #------------------------------------------------------------------------------
