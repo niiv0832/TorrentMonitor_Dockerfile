@@ -52,9 +52,10 @@ RUN apt-get update -y && \
     locale-gen && \
     echo "export LC_ALL=en_US.UTF-8" >> ~/.bashrc && \
     echo "export LANG=en_US.UTF-8" >> ~/.bashrc && \
-    echo "export LANGUAGE=en_US.UTF-8" >> ~/.bashrc && \
+    echo "export LANGUAGE=en_US.UTF-8" >> ~/.bashrc
+    # && \
 #    source ~/.bashrc && \
-    . ~/.bashrc && \
+#    . ~/.bashrc && \
 #------------------------------------------------------------------------------
 # Install: TorMon
 #------------------------------------------------------------------------------  
