@@ -11,18 +11,14 @@ ENV VERSION="1.8.2" \
     CRON_TIMEOUT="0/10 * * * *" \
     PHP_TIMEZONE="UTC" \
     PHP_MEMORY_LIMIT="512M" 
-    #\
-#    LD_PRELOAD="/usr/lib/preloadable_libiconv.so"
 #------------------------------------------------------------------------------
 # Install:
 #------------------------------------------------------------------------------
-RUN apt update && \
-    apt upgrade && \
-    
+RUN apt-get update -y && \
 #------------------------------------------------------------------------------
 # Install: nginx and php
 #-----------------------------------------------------------------------------    
-    apt -y install \
+    apt-get install -y --no-install-recommends \
                     bash \
                     cron \
                     nginx \
@@ -78,7 +74,6 @@ RUN apt update && \
     mkdir -p /tmp/rclone  && \
     cd /tmp/rclone && \
     curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip  && \
-    apt install unzip  && \
     unzip rclone-current-linux-amd64.zip && \
     cd /tmp/rclone/rclone-*-linux-amd64 && \
     cp rclone /bin/ && \
@@ -88,10 +83,11 @@ RUN apt update && \
 #------------------------------------------------------------------------------
 # clean
 #------------------------------------------------------------------------------
-    apt remove -y sqlite3 curl wget unzip && \
-    apt purge -y && \
-    apt autoremove -y && \
-    apt autoclean -y    
+    apt-get remove -y sqlite3 curl wget unzip && \
+    apt-get purge -y && \
+    apt-get autoremove -y && \
+    apt-get autoclean -y && \
+    rm -rf /var/lib/apt/lists/*
 #------------------------------------------------------------------------------
 # Populate root file system:
 #------------------------------------------------------------------------------
