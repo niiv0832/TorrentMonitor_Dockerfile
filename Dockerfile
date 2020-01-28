@@ -26,7 +26,6 @@ RUN apt-get update -y && \
                     cron \
                     nginx \
                     wget \
-                    curl \
                     unzip \
                     sqlite3 \
                     locales \
@@ -77,7 +76,7 @@ RUN apt-get update -y && \
 #------------------------------------------------------------------------------     
     mkdir -p /tmp/rclone  && \
     cd /tmp/rclone && \
-    curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip  && \
+    wget -q https://downloads.rclone.org/rclone-current-linux-amd64.zip  && \
     unzip rclone-current-linux-amd64.zip && \
     cd /tmp/rclone/rclone-*-linux-amd64 && \
     cp rclone /bin/ && \
@@ -87,7 +86,7 @@ RUN apt-get update -y && \
 #------------------------------------------------------------------------------
 # clean
 #------------------------------------------------------------------------------
-    apt-get remove -y sqlite3 curl wget unzip && \
+    apt-get remove -y sqlite3 wget unzip && \
     apt-get purge -y && \
     apt-get autoremove -y && \
     apt-get autoclean -y && \
