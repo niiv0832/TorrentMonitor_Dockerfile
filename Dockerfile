@@ -11,9 +11,9 @@ ENV VERSION="1.8.2" \
     CRON_TIMEOUT="0/10 * * * *" \
     PHP_TIMEZONE="UTC" \
     PHP_MEMORY_LIMIT="512M" \
-    LC_ALL en_US.UTF-8 \
-    LANG en_US.UTF-8 \
-    LANGUAGE en_US.UTF-8
+    LC_ALL="en_US.UTF-8" \
+    LANG="en_US.UTF-8" \
+    LANGUAGE="en_US.UTF-8"
 #------------------------------------------------------------------------------
 # Install:
 #------------------------------------------------------------------------------
