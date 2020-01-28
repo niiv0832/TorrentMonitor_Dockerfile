@@ -49,9 +49,9 @@ RUN apt-get update -y && \
 #------------------------------------------------------------------------------
     sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen && \
     locale-gen && \
-    echo "export LC_ALL=en_US.UTF-8" >> ~/.bashrc && \
-    echo "export LANG=en_US.UTF-8" >> ~/.bashrc && \
-    echo "export LANGUAGE=en_US.UTF-8" >> ~/.bashrc && \
+#    echo "export LC_ALL=en_US.UTF-8" >> ~/.bashrc && \
+#    echo "export LANG=en_US.UTF-8" >> ~/.bashrc && \
+#    echo "export LANGUAGE=en_US.UTF-8" >> ~/.bashrc && \
 #    source ~/.bashrc && \
 #    . ~/.bashrc && \
 #------------------------------------------------------------------------------
