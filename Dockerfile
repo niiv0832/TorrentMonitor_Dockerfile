@@ -43,7 +43,15 @@ RUN apt-get update -y && \
                     php-sqlite3 \
                     php-xml \
                     php-fpm \
-                    php-zip && \
+                    php-zip \ 
+# additional php modules                                        
+                    php-bcmath \
+                    php-gd \
+                    php-imap \
+#                    php-mcrypt \
+                    php-soap \
+                    php-tidy \
+                    php-xmlrpc && \
 #------------------------------------------------------------------------------
 # Configuration Locale
 #------------------------------------------------------------------------------
