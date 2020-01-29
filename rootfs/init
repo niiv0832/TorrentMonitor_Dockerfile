@@ -28,27 +28,6 @@ chmod 777 /tmp
 # log for cron
 touch /var/log/nginx/torrentmonitor_cron_error.log
 
-#check http-knocking start script
-if [ -f /scripts/httpknocking.sh ];
-# copy and run http-knocking start script
-then
-cp /scripts/httpknocking.sh /httpknocking.sh
-chmod u+x /httpknocking.sh
-/httpknocking.sh
-else
-echo -e "No http-knockig script.Rerun container with expose only port 80 for direct access to TorMon webui!"
-fi
-
-#check rclone start script
-if [ -f /scripts/rclonesync.sh ];
-then
-cp /scripts/rclone.conf /root/.config/rclone/rclone.conf
-cp /scripts/rclonesync.sh /rclonesync.sh
-chmod u+x /rclonesync.sh
-else
-echo -e “No rclone script. rclone remove from cron.”
-fi
-
 # Start apps
 service cron start 
 service php7.3-fpm start 
