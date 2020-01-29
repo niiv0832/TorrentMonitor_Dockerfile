@@ -5,13 +5,11 @@ test -f /data/htdocs/db/tm.sqlite || cp /data/htdocs/db_schema/tm.sqlite /data/h
 
 # Configure system
 # Set PHP timezone
-sed -i "s#PHP_TIMEZONE#${PHP_TIMEZONE}#" /etc/php/7.3/php.ini
 sed -i "s#PHP_TIMEZONE#${PHP_TIMEZONE}#" /etc/php/7.3/cli/php.ini
 sed -i "s#PHP_TIMEZONE#${PHP_TIMEZONE}#" /etc/php/7.3/cgi/php.ini
 sed -i "s#PHP_TIMEZONE#${PHP_TIMEZONE}#" /etc/php/7.3/fpm/php.ini
 
 # Set PHP memory limit
-sed -i "s#PHP_MEMORY_LIMIT#${PHP_MEMORY_LIMIT}#" /etc/php/7.3/php.ini
 sed -i "s#PHP_MEMORY_LIMIT#${PHP_MEMORY_LIMIT}#" /etc/php/7.3/cli/php.ini
 sed -i "s#PHP_MEMORY_LIMIT#${PHP_MEMORY_LIMIT}#" /etc/php/7.3/cgi/php.ini
 sed -i "s#PHP_MEMORY_LIMIT#${PHP_MEMORY_LIMIT}#" /etc/php/7.3/fpm/php.ini
