@@ -44,11 +44,10 @@ RUN apt-get update -y && \
                     php-xml \
                     php-fpm \
                     php-zip \ 
-# additional php modules                                        
+#                                      
                     php-bcmath \
                     php-gd \
                     php-imap \
-#                    php-mcrypt \
                     php-soap \
                     php-tidy \
                     php-xmlrpc && \
@@ -120,7 +119,7 @@ LABEL ru.korphome.version="${VERSION}" \
 VOLUME ["/data/htdocs/db", "/data/htdocs/torrents", "/scripts"]
 WORKDIR /
 #------------------------------------------------------------------------------
-# port 80 for direct TorMon; port 2000 for access through http-knocking:
+# port 2000 for access through http-knocking:
 #------------------------------------------------------------------------------
-EXPOSE 80 2000
+EXPOSE 2000
 ENTRYPOINT ["/init"]
