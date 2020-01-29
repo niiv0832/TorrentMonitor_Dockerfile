@@ -43,12 +43,10 @@ RUN apt-get update -y && \
                     php-sqlite3 \
                     php-xml \
                     php-fpm \
-                    php-zip \ 
-# additional php modules                                        
+                    php-zip \                                        
                     php-bcmath \
                     php-gd \
                     php-imap \
-#                    php-mcrypt \
                     php-soap \
                     php-tidy \
                     php-xmlrpc && \
@@ -74,23 +72,7 @@ RUN apt-get update -y && \
     ln -sf /dev/stdout /var/log/nginx/access.log && \
     ln -sf /dev/stderr /var/log/nginx/error.log && \
     ln -sf /dev/stdout /var/log/php-fpm.log && \
-    rm -rf /tmp/* && \ 
-#------------------------------------------------------------------------------
-# Install: http-knocking
-#------------------------------------------------------------------------------  
-    /usr/local/bin/npm install -g http-knocking && \
-#------------------------------------------------------------------------------
-# Install: rclone
-#------------------------------------------------------------------------------     
-    mkdir -p /tmp/rclone  && \
-    cd /tmp/rclone && \
-    wget -q --no-check-certificate https://downloads.rclone.org/rclone-current-linux-amd64.zip  && \
-    unzip rclone-current-linux-amd64.zip && \
-    cd /tmp/rclone/rclone-*-linux-amd64 && \
-    cp rclone /bin/ && \
-    chown root:root /bin/rclone && \
-    chmod 755 /bin/rclone && \
-    rm -rf /tmp/rclone && \
+    rm -rf /tmp/* && \   
 #------------------------------------------------------------------------------
 # clean
 #------------------------------------------------------------------------------
@@ -114,13 +96,12 @@ LABEL ru.korphome.version="${VERSION}" \
       ru.korphome.release-date="${RELEASE_DATE}"
 #------------------------------------------------------------------------------
 # Set volumes, workdir, expose ports and entrypoint:
-# /scripts - for http-knocking starting script and rclone config file
 # /data/htdocs/torrents - for download .torrent files
 #------------------------------------------------------------------------------
-VOLUME ["/data/htdocs/db", "/data/htdocs/torrents", "/scripts"]
+VOLUME ["/data/htdocs/db", "/data/htdocs/torrents" ]
 WORKDIR /
 #------------------------------------------------------------------------------
 # port 80 for direct TorMon; port 2000 for access through http-knocking:
 #------------------------------------------------------------------------------
-EXPOSE 80 2000
+EXPOSE 80
 ENTRYPOINT ["/init"]
