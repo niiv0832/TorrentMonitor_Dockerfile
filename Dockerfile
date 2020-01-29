@@ -10,10 +10,11 @@ ENV VERSION="1.8.2" \
     RELEASE_DATE="03.01.2020" \
     CRON_TIMEOUT="0/10 * * * *" \
     PHP_TIMEZONE="UTC" \
-    PHP_MEMORY_LIMIT="512M" \
-    LC_ALL="en_US.UTF-8" \
-    LANG="en_US.UTF-8" \
-    LANGUAGE="en_US.UTF-8"
+    PHP_MEMORY_LIMIT="512M" 
+    #\
+    #LC_ALL="en_US.UTF-8" \
+    #LANG="en_US.UTF-8" \
+    #LANGUAGE="en_US.UTF-8"
 #------------------------------------------------------------------------------
 # Install:
 #------------------------------------------------------------------------------
@@ -52,16 +53,6 @@ RUN apt-get update -y && \
                     php-tidy \
                     php-xmlrpc && \
 #------------------------------------------------------------------------------
-# Configuration Locale
-#------------------------------------------------------------------------------
-    sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen && \
-    locale-gen && \
-    echo "export LC_ALL=en_US.UTF-8" >> ~/.bashrc && \
-    echo "export LANG=en_US.UTF-8" >> ~/.bashrc && \
-    echo "export LANGUAGE=en_US.UTF-8" >> ~/.bashrc && \
-#    source ~/.bashrc && \
-    . ~/.bashrc && \
-#------------------------------------------------------------------------------
 # Install: TorMon
 #------------------------------------------------------------------------------  
     wget -q http://korphome.ru/torrent_monitor/tm-latest.zip -O /tmp/tm-latest.zip && \
@@ -90,6 +81,16 @@ RUN apt-get update -y && \
     chown root:root /bin/rclone && \
     chmod 755 /bin/rclone && \
     rm -rf /tmp/rclone && \
+#------------------------------------------------------------------------------
+# Configuration Locale
+#------------------------------------------------------------------------------
+    sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen && \
+    locale-gen && \
+    echo "export LC_ALL=en_US.UTF-8" >> ~/.bashrc && \
+    echo "export LANG=en_US.UTF-8" >> ~/.bashrc && \
+    echo "export LANGUAGE=en_US.UTF-8" >> ~/.bashrc && \
+#    source ~/.bashrc && \
+    . ~/.bashrc && \
 #------------------------------------------------------------------------------
 # clean
 #------------------------------------------------------------------------------
