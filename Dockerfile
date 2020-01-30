@@ -8,7 +8,7 @@ MAINTAINER nniiv0832 <dockerhubme-tormon@yahoo.com>
 #------------------------------------------------------------------------------
 ENV VERSION="1.8.2" \
     RELEASE_DATE="03.01.2020" \
-    CRON_TIMEOUT="0/10 * * * *" \
+    CRON_TIMEOUT="*/10 * * * *" \
     PHP_TIMEZONE="UTC" \
     PHP_MEMORY_LIMIT="512M" \
     LC_ALL="en_US.UTF-8" \
