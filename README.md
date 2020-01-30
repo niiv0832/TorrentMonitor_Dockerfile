@@ -1,7 +1,7 @@
 # All-in one Docker container with TorrentMonitor, Rclone, Http-knocking
 #
 ### TorrentMonitor 
-*version ``1.8.2``, ``nginx``, ``php7.3``, ``sqlite``*
+*version ``1.8.2``, ``nginx``, ``php7.3``, ``sqlite``* _at Debian base Docker container_ 
 
 **TorrentMonitor** - monitoring torrent site, downloads torrent files based on a user-defined filter, and much more.
 
