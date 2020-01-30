@@ -41,6 +41,7 @@ fi
 #check rclone start script
 if [ -f /scripts/rclonesync.sh ];
 then
+mkdir -p /root/.config/rclone/
 cp /scripts/rclone.conf /root/.config/rclone/rclone.conf
 cp /scripts/rclonesync.sh /rclonesync.sh
 chmod u+x /rclonesync.sh
