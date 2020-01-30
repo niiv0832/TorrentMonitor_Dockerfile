@@ -19,6 +19,7 @@ sed -i "s#CRON_TIMEOUT#${CRON_TIMEOUT}#" /var/spool/cron/crontabs/root
 
 # Set owner for app directory
 chown -R www-data:www-data /data/htdocs
+chmod u+x /var/spool/cron/crontabs/root
 
 # Write temp files by nginx
 chmod 777 /tmp
