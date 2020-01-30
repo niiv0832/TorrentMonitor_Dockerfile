@@ -41,7 +41,7 @@ Link on github: <a href="https://www.github.com/niiv0832/TorrentMonitor_Dockerfi
 docker run -d --name torrentmonitor --restart=always -p 55443:2000 -v $YOUR_PATH_TO_CONFIG_DIR$:/scripts -v $YOUR_PATH_TO_TORRENTS_DIR$:/data/htdocs/torrents -v $YOUR_PATH_TO_SQLITE.DB_DIR$:/data/htdocs/db -t niiv0832/tormon:latest
 ```
 _$YOUR_PATH_TO_CONFIG_DIR$_:**/scripts** - thsi directory must contain _config and script files_ (all files name must be as writedown) for:
-* rclone: 
+#### rclone: 
   * __rclone.conf__ - files with rclone configurations (you may read at <a href="https://rclone.org">Rclone official site</a> HOWTO create config for different cloud service.
 
 Example of rclone.conf:
@@ -52,7 +52,7 @@ scope = drive
 token = {"access_token":"$.......past..here....$","token_type":"Bearer","refresh_token":"$.......past..here....$","expiry":"2100-12-59T22:42:54.679710289+03:00"}
 root_folder_id = $.......past..here....$
 ```
-  * __rclonesync.sh__ - script to run rclone (this script added to crontab)
+   * __rclonesync.sh__ - script to run rclone (this script added to crontab)
   
   Example of rclonesync.sh:
 ```
