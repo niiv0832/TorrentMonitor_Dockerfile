@@ -66,11 +66,11 @@ RUN apt-get update -y && \
     ln -sf /dev/stdout /var/log/php-fpm.log && \
     rm -rf /tmp/* && \ 
 #------------------------------------------------------------------------------
-# Install: http-knocking
+# Install: http-knocking v0.8.4
 #------------------------------------------------------------------------------  
     /usr/local/bin/npm install -g http-knocking && \
 #------------------------------------------------------------------------------
-# Install: rclone
+# Install: rclone v1.51.0
 #------------------------------------------------------------------------------     
     mkdir -p /tmp/rclone  && \
     cd /tmp/rclone && \
