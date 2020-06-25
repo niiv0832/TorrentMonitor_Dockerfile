@@ -6,8 +6,8 @@ MAINTAINER nniiv0832 <dockerhubme-tormon@yahoo.com>
 #------------------------------------------------------------------------------
 # Environment variables:
 #------------------------------------------------------------------------------
-ENV VERSION="1.8.2" \
-    RELEASE_DATE="03.01.2020" \
+ENV VERSION="1.8.3" \
+    RELEASE_DATE="25.06.2020" \
     CRON_TIMEOUT="*/10 * * * *" \
     PHP_TIMEZONE="UTC" \
     PHP_MEMORY_LIMIT="512M" 
@@ -70,7 +70,7 @@ RUN apt-get update -y && \
 #------------------------------------------------------------------------------  
     /usr/local/bin/npm install -g http-knocking && \
 #------------------------------------------------------------------------------
-# Install: rclone v1.51.0
+# Install: rclone v1.52.2
 #------------------------------------------------------------------------------     
     mkdir -p /tmp/rclone  && \
     cd /tmp/rclone && \
