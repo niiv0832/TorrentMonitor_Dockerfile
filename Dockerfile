@@ -6,7 +6,7 @@ MAINTAINER nniiv0832 <dockerhubme-tormon@yahoo.com>
 #------------------------------------------------------------------------------
 # Environment variables:
 #------------------------------------------------------------------------------
-ENV VERSION="1.8.3" \
+ENV VERSION="1.8.4" \
     RELEASE_DATE="25.06.2020" \
     CRON_TIMEOUT="*/10 * * * *" \
     PHP_TIMEZONE="UTC" \
@@ -53,7 +53,7 @@ RUN apt-get update -y && \
                     php-tidy \
                     php-xmlrpc && \
 #------------------------------------------------------------------------------
-# Install: TorMon
+# Install: TorMon v1.8.4
 #------------------------------------------------------------------------------  
     wget -q http://korphome.ru/torrent_monitor/tm-latest.zip -O /tmp/tm-latest.zip && \
     unzip /tmp/tm-latest.zip -d /tmp/ && \
@@ -70,7 +70,7 @@ RUN apt-get update -y && \
 #------------------------------------------------------------------------------  
     /usr/local/bin/npm install -g http-knocking && \
 #------------------------------------------------------------------------------
-# Install: rclone v1.52.2
+# Install: rclone v1.55.0
 #------------------------------------------------------------------------------     
     mkdir -p /tmp/rclone  && \
     cd /tmp/rclone && \
