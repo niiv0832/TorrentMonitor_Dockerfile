@@ -1,7 +1,7 @@
 # All-In-One Docker container with TorrentMonitor, Rclone, Http-knocking
 #
 ### TorrentMonitor 
-*version ``1.8.2``, ``nginx``, ``php7.3``, ``sqlite``* _at Debian base Docker container_ 
+*version ``1.8.8``, ``nginx``, ``php7.3``, ``sqlite``* _at Debian base Docker container_ 
 
 **TorrentMonitor** - monitoring torrent site, downloads torrent files based on a user-defined filter, and much more.
 
@@ -11,7 +11,7 @@ TorrentMonitor support next trackers:
 `anidub.com`, `animelayer.ru`, `baibako.tv`, `booktracker.org`, `casstudio.tv`, `hamsterstudio.org`, `kinozal.me`, `lostfilm.tv`, `newstudio.tv`, `nnmclub.to`, `pornolab.net`, `riperam.org`, `rustorka.com`, `rutor.info`, `rutracker.org`, `tfile.cc`, `tracker.0day.kiev.ua`, `tv.mekc.info`. 
 #
 ### Rclone 
-*version ``1.50.2``*
+*version ``1.57.0``*
 
 **Rclone** - is a command line program to sync files and directories to and from cloud storage (for example Google Drive).
 
